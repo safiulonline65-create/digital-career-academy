@@ -63,8 +63,8 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 
 // STEP 1: Supabase Dashboard > Project Settings > API. Paste your Project URL and Publishable/anon key here.
 // Never put the service_role/secret key in this public website.
-const SUPABASE_URL = 'https://wjgiiftctqpkmlcjmand.supabase.co'
- const SUPABASE_ANON_KEY = 'sb_publishable_gmNQhbzzHz6x0aK_nKPPDA_7rwaPWGZ';
+const SUPABASE_URL = 'https://wjgiiftctqpkmlcjmand.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_gmNQhbzzHz6x0aK_nKPPDA_7rwaPWGZ';
 let db = null, currentUser = null, currentProfile = null, allCourses = [];
 const configured = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('PASTE_') && SUPABASE_ANON_KEY.length > 30 && !SUPABASE_ANON_KEY.includes('PASTE_');
 if(configured){ db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY); const {data:{session}}=await db.auth.getSession(); if(session) await loadSession(session.user); db.auth.onAuthStateChange((_event,session)=>{ if(session) loadSession(session.user); }); }
@@ -76,17 +76,20 @@ window.enrollCourse=(id)=>{document.getElementById('sCourse').value=String(id);o
 window.logout=async()=>{if(db) await db.auth.signOut();currentUser=null;currentProfile=null;showHome()};
 function status(id,msg,type=''){const el=document.getElementById(id);el.textContent=msg;el.className='status '+type}
 function normalizePhone(p){return p.trim().replace(/[^\d+]/g,'')}
+// Password-only mobile login: use a private synthetic email internally; students enter only their phone.
+function mobileLoginEmail(phone){return phone.replace(/\D/g,'')+'@login.digitalcareeracademy.com'}
 window.signup=async()=>{
  if(!db){status('signupStatus','আগে Supabase Project URL ও Publishable Key বসাতে হবে। README ফাইল দেখুন।','err');return}
  const name=sName.value.trim(),father=sFather.value.trim(),address=sAddress.value.trim(),phone=normalizePhone(sPhone.value),email=sEmail.value.trim()||null,qual=sQual.value.trim(),course=Number(sCourse.value),password=sPassword.value;
  if(!name||!father||!address||!phone||!qual||!course||password.length<8){status('signupStatus','সব * দেওয়া তথ্য পূরণ করুন। Password কমপক্ষে ৮ অক্ষরের হতে হবে।','err');return}
  if(!/^\+[1-9]\d{7,14}$/.test(phone)){status('signupStatus','মোবাইল নম্বর Country Code-সহ লিখুন। যেমন +918001234567','err');return}
  status('signupStatus','অ্যাকাউন্ট তৈরি হচ্ছে...'); 
- const {data,error}=await db.auth.signUp({phone,password,options:{data:{full_name:name,father_name:father,address,mobile:phone,email,qualification:qual}}});
+ const loginEmail=mobileLoginEmail(phone);
+ const {data,error}=await db.auth.signUp({email:loginEmail,password,options:{data:{full_name:name,father_name:father,address,mobile:phone,contact_email:email,qualification:qual}}});
  if(error){status('signupStatus',error.message,'err');return}
  if(data.user){ 
    if(data.session){await db.from('profiles').upsert({id:data.user.id,full_name:name,father_name:father,address,mobile:phone,email,qualification:qual,role:'student'});const {error:enErr}=await db.from('enrollments').insert({student_id:data.user.id,course_id:course,status:'pending'});if(enErr) console.error(enErr);await loadSession(data.user);closeAuth();return}
-   status('signupStatus','অ্যাকাউন্ট তৈরি হয়েছে। Phone confirmation যদি বন্ধ থাকে, Login করুন। যদি OTP চায়, Supabase Auth settings-এ Confirm phone বন্ধ করতে হবে।','ok');setAuthMode('login');loginPhone.value=phone;
+   status('signupStatus','অ্যাকাউন্ট তৈরি হয়েছে, কিন্তু Supabase-এ Email Confirmation চালু আছে। Supabase Authentication → Providers → Email থেকে Confirm email OFF করে আবার Login করুন।','err');
  }
 };
 window.login=async()=>{
@@ -94,18 +97,18 @@ window.login=async()=>{
  const phone=normalizePhone(loginPhone.value),password=loginPassword.value;
  if(!phone||!password){status('loginStatus','মোবাইল নম্বর ও Password লিখুন।','err');return}
  status('loginStatus','Login হচ্ছে...');
- const {data,error}=await db.auth.signInWithPassword({phone,password});
+ const {data,error}=await db.auth.signInWithPassword({email:mobileLoginEmail(phone),password});
  if(error){status('loginStatus',error.message,'err');return}
  await loadSession(data.user);closeAuth();
 };
 async function loadSession(user){
  currentUser=user;
  let {data:profile}=await db.from('profiles').select('*').eq('id',user.id).maybeSingle();
- if(!profile){const m=user.user_metadata||{};const ins=await db.from('profiles').insert({id:user.id,full_name:m.full_name||'',father_name:m.father_name||'',address:m.address||'',mobile:user.phone||m.mobile||'',email:m.email||'',qualification:m.qualification||'',role:'student'}).select().single();profile=ins.data}
+ if(!profile){const m=user.user_metadata||{};const ins=await db.from('profiles').insert({id:user.id,full_name:m.full_name||'',father_name:m.father_name||'',address:m.address||'',mobile:user.phone||m.mobile||'',email:m.contact_email||m.email||'',qualification:m.qualification||'',role:'student'}).select().single();profile=ins.data}
  currentProfile=profile;
  document.getElementById('home').style.display='none';document.getElementById('dashboard').style.display='block';window.scrollTo(0,0);
  document.getElementById('welcome').textContent='স্বাগতম, '+(profile?.full_name||'Student');
- document.getElementById('userPhone').textContent=user.phone||'';
+ document.getElementById('userPhone').textContent=user.phone||user.user_metadata?.mobile||'';
  document.getElementById('adminTab').style.display=profile?.role==='admin'?'block':'none';
  await refreshDashboard();
 }
