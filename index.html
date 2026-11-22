@@ -11,7 +11,21 @@
 .modal{position:fixed;inset:0;background:#06152dcc;z-index:30;display:none;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalBox{background:#fff;width:min(520px,100%);max-height:92vh;overflow:auto;border-radius:22px;padding:25px;box-shadow:0 30px 80px #0005}.modalTop{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}.modalTop h2{margin:0;color:var(--navy)}.x{border:0;background:#eef2f8;border-radius:10px;width:36px;height:36px;font-size:20px}.field{margin:12px 0}.field label{display:block;font-size:13px;font-weight:750;margin-bottom:6px}.field input,.field select,.field textarea{width:100%;padding:12px 13px;border:1px solid #d8e1ed;border-radius:11px;background:#fbfcff;outline:none}.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px #1769e018}.hint{font-size:12px;color:var(--muted);line-height:1.5}.full{width:100%}.switchText{text-align:center;font-size:13px;color:var(--muted);margin-top:15px}.link{color:var(--blue);font-weight:750;cursor:pointer}.notice{padding:11px 13px;border-radius:11px;background:#fff7e6;color:#805300;font-size:12px;line-height:1.5;margin:12px 0}.status{font-size:13px;margin:10px 0;min-height:20px}.status.err{color:var(--red)}.status.ok{color:var(--green)}
 .dashboard{display:none;padding:34px 0 70px}.dashHead{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap;margin-bottom:22px}.dashHead h1{margin:0;color:var(--navy)}.dashGrid{display:grid;grid-template-columns:230px 1fr;gap:20px}.side,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;box-shadow:var(--shadow)}.side button{display:block;width:100%;text-align:left;border:0;background:transparent;padding:12px;border-radius:10px;color:#42516a;font-weight:700}.side button.active,.side button:hover{background:#eaf2ff;color:#145cc2}.panel h2{margin:0 0 18px}.dashCards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.mini{background:#f4f8ff;border-radius:14px;padding:16px}.mini b{display:block;font-size:24px;color:var(--blue)}.mini span{font-size:12px;color:var(--muted)}.tableWrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:12px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:#65748c;background:#f8faff}.pill{display:inline-block;border-radius:99px;padding:4px 9px;font-size:11px;font-weight:800;background:#fff3d9;color:#966000}.pill.approved{background:#e4f8ef;color:#087b55}.adminOnly{display:none}.empty{padding:25px;text-align:center;color:var(--muted);background:#f8faff;border-radius:14px}.mobileMenu{display:none}
 @media(max-width:850px){.heroGrid{grid-template-columns:1fr}.heroCard{max-width:520px}.courses{grid-template-columns:repeat(2,1fr)}.features{grid-template-columns:1fr 1fr}.dashGrid{grid-template-columns:1fr}.side{display:flex;overflow:auto;gap:5px;padding:8px}.side button{white-space:nowrap;width:auto}.footerGrid{grid-template-columns:1fr 1fr}}
-@media(max-width:600px){.navin{height:66px}.navlinks{display:none}.hero{padding:54px 0}.hero h1{font-size:39px}.courses,.features{grid-template-columns:1fr}.section{padding:52px 0}.cta{padding:25px;display:block}.cta .btn{margin-top:17px}.footerGrid{grid-template-columns:1fr}.dashCards{grid-template-columns:1fr 1fr}.course{min-height:220px}}
+@media(max-width:600px){
+.navin{height:auto;min-height:66px;flex-wrap:wrap;padding:10px 0}
+.mobileMenu{display:inline-flex;padding:9px 10px;font-size:12px}
+.navlinks{display:none}
+.hero{padding:54px 0}
+.hero h1{font-size:39px}
+.courses,.features{grid-template-columns:1fr}
+.section{padding:52px 0}
+.cta{padding:25px;display:block}
+.cta .btn{margin-top:17px}
+.footerGrid{grid-template-columns:1fr}
+.dashCards{grid-template-columns:1fr 1fr}
+.course{min-height:220px}
+}{height:auto;min-height:66px;flex-wrap:wrap;padding:10px 0}
+.mobileMenu{display:inline-flex;padding:9px 10px;font-size:12px}{.navin{height:66px}.navlinks{display:none}.hero{padding:54px 0}.hero h1{font-size:39px}.courses,.features{grid-template-columns:1fr}.section{padding:52px 0}.cta{padding:25px;display:block}.cta .btn{margin-top:17px}.footerGrid{grid-template-columns:1fr}.dashCards{grid-template-columns:1fr 1fr}.course{min-height:220px}}
 </style>
 </head>
 <body>
