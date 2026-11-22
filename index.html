@@ -73,7 +73,22 @@ window.closeAuth=()=>document.getElementById('authModal').classList.remove('show
 window.setAuthMode=(mode)=>{document.getElementById('authTitle').textContent=mode==='signup'?'Student Registration':'Student Login';document.getElementById('loginForm').hidden=mode!=='login';document.getElementById('signupForm').hidden=mode!=='signup'};
 window.showHome=()=>{document.getElementById('home').style.display='';document.getElementById('dashboard').style.display='none';window.scrollTo(0,0)};
 window.enrollCourse=(id)=>{document.getElementById('sCourse').value=String(id);openAuth('signup')};
-window.logout=async()=>{if(db) await db.auth.signOut();currentUser=null;currentProfile=null;showHome()};
+window.logout=async()=>{
+  try {
+    if(db) {
+      const {error}=await db.auth.signOut({scope:'local'});
+      if(error) throw error;
+    }
+    currentUser=null;
+    currentProfile=null;
+    document.getElementById('dashboard').style.display='none';
+    document.getElementById('home').style.display='block';
+    closeAuth();
+    window.scrollTo(0,0);
+  } catch(error) {
+    alert('Logout হয়নি: '+error.message);
+  }
+};
 function status(id,msg,type=''){const el=document.getElementById(id);el.textContent=msg;el.className='status '+type}
 function normalizePhone(p){return p.trim().replace(/[^\d+]/g,'')}
 // Password-only mobile login: use a private synthetic email internally; students enter only their phone.
