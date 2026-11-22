@@ -102,7 +102,7 @@ let db = null, currentUser = null, currentProfile = null, allCourses = [];
 const configured = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('PASTE_') && SUPABASE_ANON_KEY.length > 30 && !SUPABASE_ANON_KEY.includes('PASTE_');
 if(configured){ db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY); const {data:{session}}=await db.auth.getSession(); if(session) await loadSession(session.user); db.auth.onAuthStateChange((_event,session)=>{ if(session) loadSession(session.user); }); }
 window.openAuth=(mode='login')=>{document.getElementById('authModal').classList.add('show');setAuthMode(mode)};
-window.closeAuth=()=>document.getElementById('authModal').classList.remove('show'
+window.closeAuth=()=>document.getElementById('authModal').classList.remove('show');
 window.setAuthMode=(mode)=>{
 document.getElementById('authTitle').textContent=mode==='signup'?'Student Registration':mode==='admin'?'Admin Login':'Student Login';
 document.getElementById('loginForm').hidden=mode==='signup';
