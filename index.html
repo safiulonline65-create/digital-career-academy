@@ -17,8 +17,9 @@
 <body>
 <div class="topbar"><div class="wrap"><span>📚 Practical Digital Skills • Career Training</span><span>☎ 8001795038 &nbsp; | &nbsp; ✉ dlspvtltdpayout@yahoo.com</span></div></div>
 <header class="nav"><div class="wrap navin">
-<a class="brand" href="#" onclick="showHome();return false"><span class="logo">DCA</span><span>Digital Career Academy<small style="display:block;font-size:10px;color:#7a8aa2;font-weight:650;letter-spacing:1.2px">LEARN • GROW • SUCCEED</small></span></a>
-<nav class="navlinks"><a href="#courses">Courses</a><a href="#why">Why Us</a><a href="#contact">Contact</a><button class="btn outline" onclick="openAuth('login')">Student Login</button><button class="btn dark" onclick="openAuth('login')">Admin Login</button><button class="btn primary" onclick="openAuth('signup')">Register Now</button></nav>
+<a class="brand" href="#" onclick="showHome();return false"><span class="l
+                                                              ogo">DCA</span><span>Digital Career Academy<small style="display:block;font-size:10px;color:#7a8aa2;font-weight:650;letter-spacing:1.2px">LEARN • GROW • SUCCEED</small></span></a>
+<nav class="navlinks"><a href="#courses">Courses</a><a href="#why">Why Us</a><a href="#contact">Contact</a><button class="btn outline" onclick="openAuth('login')">Student Login</button><button class="btn dark" onclick="openAuth('admin')">Admin Login</button><button class="btn primary" onclick="openAuth('signup')">Register Now</button></nav>
 <button class="btn primary mobileMenu" onclick="openAuth('login')">Login / Register</button>
 </div></header>
 
@@ -85,9 +86,12 @@ let db = null, currentUser = null, currentProfile = null, allCourses = [];
 const configured = SUPABASE_URL.startsWith('https://') && !SUPABASE_URL.includes('PASTE_') && SUPABASE_ANON_KEY.length > 30 && !SUPABASE_ANON_KEY.includes('PASTE_');
 if(configured){ db=createClient(SUPABASE_URL,SUPABASE_ANON_KEY); const {data:{session}}=await db.auth.getSession(); if(session) await loadSession(session.user); db.auth.onAuthStateChange((_event,session)=>{ if(session) loadSession(session.user); }); }
 window.openAuth=(mode='login')=>{document.getElementById('authModal').classList.add('show');setAuthMode(mode)};
-window.closeAuth=()=>document.getElementById('authModal').classList.remove('show');
-window.setAuthMode=(mode)=>{document.getElementById('authTitle').textContent=mode==='signup'?'Student Registration':'Student Login';document.getElementById('loginForm').hidden=mode!=='login';document.getElementById('signupForm').hidden=mode!=='signup'};
-window.showHome=()=>{document.getElementById('home').style.display='';document.getElementById('dashboard').style.display='none';window.scrollTo(0,0)};
+window.closeAuth=()=>document.getElementById('authModal').classList.remove('show'
+window.setAuthMode=(mode)=>{
+document.getElementById('authTitle').textContent=mode==='signup'?'Student Registration':mode==='admin'?'Admin Login':'Student Login';
+document.getElementById('loginForm').hidden=mode==='signup';
+document.getElementById('signupForm').hidden=mode!=='signup';
+};window.showHome=()=>{document.getElementById('home').style.display='';document.getElementById('dashboard').style.display='none';window.scrollTo(0,0)};
 window.enrollCourse=(id)=>{document.getElementById('sCourse').value=String(id);openAuth('signup')};
 window.logout=async()=>{
   try {
@@ -126,10 +130,32 @@ window.signup=async()=>{
 window.login=async()=>{
  if(!db){status('loginStatus','আগে Supabase Project URL ও Publishable Key বসাতে হবে। README ফাইল দেখুন।','err');return}
  const phone=normalizePhone(loginPhone.value),password=loginPassword.value;
- if(!phone||!password){status('loginStatus','মোবাইল নম্বর ও Password লিখুন।','err');return}
+ if(!phone||!password){status('loginStatus','মোবাইল নম্বর ও Password লিখুন।','err');return}{status('
+                              loginStatus','মোবাইল নম্বর ও Password লিখুন।','err');return}
  status('loginStatus','Login হচ্ছে...');
  const {data,error}=await db.auth.signInWithPassword({email:mobileLoginEmail(phone),password});
  if(error){status('loginStatus',error.message,'err');return}
+  const {data:profile,error:profileError}=await db.from('profiles').select('role').eq('id',data.user.id).maybeSingle();
+
+const adminLogin=document.getElementById('authTitle').textContent==='Admin Login';
+
+if(profileError || !profile){
+ await db.auth.signOut({scope:'local'});
+ status('loginStatus','Profile পাওয়া যায়নি।','err');
+ return;
+}
+
+if(adminLogin && profile.role!=='admin'){
+ await db.auth.signOut({scope:'local'});
+ status('loginStatus','এটি Admin Account নয়।','err');
+ return;
+}
+
+if(!adminLogin && profile.role==='admin'){
+ await db.auth.signOut({scope:'local'});
+ status('loginStatus','Admin Login বাটন ব্যবহার করুন।','err');
+ return;
+}
  await loadSession(data.user);closeAuth();
 };
 async function loadSession(user){
@@ -144,7 +170,8 @@ async function loadSession(user){
  await refreshDashboard();
 }
 async function refreshDashboard(){
- const {data:enrs=[]}=await db.from('enrollments').select('id,status,created_at,courses(id,name,duration,offer_fee)').eq('student_id',currentUser.id).order('created_at',{ascending:false});
+ const {data:enrs=[]}=await db.f
+   rom('enrollments').select('id,status,created_at,courses(id,name,duration,offer_fee)').eq('student_id',currentUser.id).order('created_at',{ascending:false});
  document.getElementById('countCourses').textContent=enrs.length;document.getElementById('countApproved').textContent=enrs.filter(x=>x.status==='approved').length;
  document.getElementById('enrollmentList').innerHTML=enrs.length?`<div class="tableWrap"><table><thead><tr><th>Course</th><th>Fee</th><th>Status</th></tr></thead><tbody>${enrs.map(x=>`<tr><td>${esc(x.courses?.name||'Course')}</td><td>₹${x.courses?.offer_fee??'—'}</td><td><span class="pill ${x.status==='approved'?'approved':''}">${esc(x.status)}</span></td></tr>`).join('')}</tbody></table></div>`:'<div class="empty">এখনও কোনো কোর্সে আবেদন করেননি।</div>';
  const approved=enrs.filter(x=>x.status==='approved'&&x.courses?.id).map(x=>x.courses.id);
