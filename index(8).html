@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071a36">
+<title>Digital Career Academy | Learn • Grow • Succeed</title>
+<meta name="description" content="Digital Career Academy — practical digital skills and career training.">
+<style>
+:root{--navy:#071a36;--blue:#1769e0;--sky:#eaf2ff;--ink:#17243a;--muted:#68758a;--white:#fff;--line:#dce5f2;--green:#12845b;--red:#c43b45;--shadow:0 12px 35px #071a3612}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,"Noto Sans Bengali",sans-serif;color:var(--ink);background:#f6f9ff;line-height:1.55}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:11px 17px;font-weight:700}.primary{background:var(--blue);color:#fff}.dark{background:var(--navy);color:#fff}.light{background:var(--sky);color:var(--blue)}.danger{background:#fff0f0;color:var(--red)}.topbar{background:var(--navy);color:white;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.brand{font-size:20px;font-weight:800;letter-spacing:.2px}.brand span{color:#80b5ff}.nav{display:flex;gap:9px;flex-wrap:wrap}.nav button{background:transparent;color:#fff;padding:8px 11px}.nav button:hover{background:#ffffff18}.hero{padding:70px 6%;background:linear-gradient(120deg,#071a36,#123e78);color:white;display:grid;grid-template-columns:1.4fr .8fr;gap:30px;align-items:center}.hero h1{font-size:clamp(32px,5vw,54px);line-height:1.12;margin:0 0 16px}.hero p{max-width:650px;color:#d9e7ff;font-size:17px}.hero-card{background:#ffffff12;border:1px solid #ffffff30;border-radius:20px;padding:25px}.hero-card strong{font-size:30px}.section{padding:48px 6%;max-width:1250px;margin:auto}.section h2{color:var(--navy);font-size:28px;margin:0 0 8px}.sub{color:var(--muted);margin:0 0 24px}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.card h3{margin:0 0 8px;color:var(--navy)}.price{font-size:22px;font-weight:800;color:var(--blue);margin:12px 0}.footer{background:var(--navy);color:#d8e5fb;text-align:center;padding:25px}.modal{display:none;position:fixed;inset:0;background:#06152dcc;z-index:20;padding:18px;overflow:auto;align-items:center;justify-content:center}.modal.show{display:flex}.modal-box{width:min(560px,100%);background:#fff;border-radius:18px;padding:24px;position:relative;max-height:94vh;overflow:auto}.close{position:absolute;right:14px;top:12px;background:#edf2fa;color:#233}.field{margin:13px 0}.field label{display:block;font-weight:700;margin-bottom:5px}.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #cbd7e8;border-radius:9px;background:#fff}.notice{background:#eef5ff;color:#254b7d;padding:11px;border-radius:9px;font-size:14px}.status{margin-top:10px;font-size:14px;font-weight:700}.status.err{color:var(--red)}.status.ok{color:var(--green)}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.tabs button.active{background:var(--navy);color:#fff}.dashboard{display:none;min-height:65vh}.dashhead{background:var(--navy);color:white;padding:25px 6%}.dashbody{padding:25px 6%;max-width:1300px;margin:auto}.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.stat{background:white;border:1px solid var(--line);border-radius:13px;padding:17px}.stat b{font-size:27px;color:var(--blue);display:block}.panel{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:16px 0;overflow:auto}.table{width:100%;border-collapse:collapse;min-width:600px}.table th,.table td{text-align:left;padding:11px;border-bottom:1px solid var(--line);vertical-align:top}.table th{background:#f0f5ff;color:var(--navy)}.small{font-size:13px;color:var(--muted)}.hidden{display:none!important}.rowline{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.link{color:var(--blue);font-weight:700;word-break:break-all}a{color:var(--blue)}@media(max-width:720px){.hero{grid-template-columns:1fr;padding:48px 6%}.topbar{align-items:flex-start}.brand{font-size:18px}.section{padding:35px 5%}.dashbody{padding:18px 5%}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Digital <span>Career</span> Academy</div>
+  <nav class="nav">
+    <button onclick="goHome()">Home</button>
+    <button onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Courses</button>
+    <button onclick="openAuth('signup')">Student Registration</button>
+    <button onclick="openAuth('login')">Student Login</button>
+    <button onclick="openAuth('admin')">Admin Login</button>
+  </nav>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div>
+      <div class="small" style="color:#a9ccff;font-weight:bold">LEARN • GROW • SUCCEED</div>
+      <h1>Build Your Skills.<br>Shape Your Future.</h1>
+      <p>প্রয়োজনীয় ডিজিটাল দক্ষতা শিখুন, নিজের ক্যারিয়ারকে এগিয়ে নিয়ে যান। আমাদের কোর্সে ভর্তি হতে Student Registration করুন।</p>
+      <button class="primary" onclick="openAuth('signup')"> ভর্তি হন / Register Now </button>
+      <button class="light" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">কোর্স দেখুন</button>
+    </div>
+    <div class="hero-card"><strong>Digital Career Academy</strong><p>Practical Learning • Career Guidance • Student Support</p><div class="small" style="color:#d8e5fb">Learn today. Grow tomorrow.</div></div>
+  </section>
+
+  <section class="section" id="courses">
+    <h2>Our Courses</h2><p class="sub">আপনার পছন্দের কোর্স বেছে নিয়ে রেজিস্ট্রেশন করুন।</p>
+    <div id="courseCards" class="cards"><div class="card">কোর্স লোড হচ্ছে...</div></div>
+  </section>
+  <section class="section">
+    <h2>Why Choose Us?</h2>
+    <div class="cards">
+      <div class="card"><h3>Practical Training</h3><p>বাস্তব কাজের মাধ্যমে দক্ষতা শেখার সুযোগ।</p></div>
+      <div class="card"><h3>Student Support</h3><p>শিক্ষার্থীদের জন্য প্রয়োজনীয় সহায়তা।</p></div>
+      <div class="card"><h3>Flexible Learning</h3><p>নিজের সুবিধামতো শেখার সুযোগ।</p></div>
+    </div>
+  </section>
+</main>
+
+<section id="dashboard" class="dashboard">
+  <div class="dashhead"><div class="rowline"><div><div class="small" style="color:#b8d4ff">DIGITAL CAREER ACADEMY</div><h2 id="welcome" style="margin:4px 0">Dashboard</h2><div id="userPhone"></div></div><button class="light" onclick="logout()">Logout</button></div></div>
+  <div class="dashbody">
+    <div id="studentArea" class="hidden">
+      <h2>Student Dashboard</h2>
+      <div class="statgrid"><div class="stat"><span class="small">My Enrollments</span><b id="countCourses">0</b></div><div class="stat"><span class="small">Approved</span><b id="countApproved">0</b></div></div>
+      <div class="panel"><h3>My Course & Class Details</h3><div id="enrollmentList">লোড হচ্ছে...</div></div>
+      <div class="panel"><h3>My Profile</h3><div id="profileDetails"></div></div>
+    </div>
+    <div id="adminArea" class="hidden">
+      <h2>Admin Dashboard</h2>
+      <div class="tabs"><button class="active" id="tabEnrollBtn" onclick="showAdminTab('enrollments')">Enrollments</button><button id="tabCoursesBtn" onclick="showAdminTab('courses')">Courses</button><button id="tabClassBtn" onclick="showAdminTab('classes')">Live Class Links</button></div>
+      <div id="adminEnrollments" class="panel"><h3>Student Enrollments</h3><div id="enrollmentAdminList">লোড হচ্ছে...</div></div>
+      <div id="adminCourses" class="panel hidden"><h3>Add Course</h3><div class="field"><label>Course Name</label><input id="newCourseName" placeholder="যেমন: Basic Computer"></div><div class="field"><label>Duration</label><input id="newCourseDuration" placeholder="যেমন: 3 Months"></div><div class="field"><label>Course Fee</label><input id="newCourseFee" type="number" placeholder="যেমন: 3000"></div><button class="primary" onclick="addCourse()">Add Course</button><div id="adminCourseList" style="margin-top:15px"></div></div>
+      <div id="adminClasses" class="panel hidden"><h3>Set Live Class / Recording Link</h3><div class="field"><label>Course</label><select id="classCourse"></select></div><div class="field"><label>Live Class URL</label><input id="liveUrl" type="url" placeholder="https://..."></div><div class="field"><label>Recording URL</label><input id="recordUrl" type="url" placeholder="https://..."></div><button class="primary" onclick="saveClassLinks()">Save Links</button></div>
+      <div id="adminStatus" class="status"></div>
+    </div>
+  </div>
+</section>
+
+<div id="authModal" class="modal" onclick="if(event.target===this)closeAuth()">
+ <div class="modal-box">
+  <button class="close" onclick="closeAuth()">✕</button>
+  <h2 id="authTitle">Student Login</h2>
+  <div id="loginForm">
+   <div class="notice">মোবাইল নম্বর Country Code-সহ লিখুন। উদাহরণ: +918001234567</div>
+   <div class="field"><label>Mobile Number</label><input id="loginPhone" type="tel" placeholder="+91XXXXXXXXXX" autocomplete="tel"></div>
+   <div class="field"><label>Password</label><input id="loginPassword" type="password" placeholder="আপনার Password" autocomplete="current-password"></div>
+   <button class="primary" style="width:100%" onclick="login()">Login</button><div id="loginStatus" class="status"></div>
+   <p class="small">নতুন শিক্ষার্থী? <a href="#" onclick="setAuthMode('signup');return false">Registration করুন</a></p>
+  </div>
+  <div id="signupForm" class="hidden">
+   <div class="field"><label>Full Name *</label><input id="sName" placeholder="আপনার নাম"></div>
+   <div class="field"><label>Father's Name *</label><input id="sFather" placeholder="পিতার নাম"></div>
+   <div class="field"><label>Address *</label><textarea id="sAddress" rows="2" placeholder="সম্পূর্ণ ঠিকানা"></textarea></div>
+   <div class="field"><label>Mobile Number *</label><input id="sPhone" type="tel" placeholder="+918001234567"></div>
+   <div class="field"><label>Email (optional)</label><input id="sEmail" type="email" placeholder="name@example.com"></div>
+   <div class="field"><label>Qualification *</label><input id="sQual" placeholder="শিক্ষাগত যোগ্যতা"></div>
+   <div class="field"><label>Select Course *</label><select id="sCourse"><option value="">কোর্স নির্বাচন করুন</option></select></div>
+   <div class="field"><label>Password *</label><input id="sPassword" type="password" minlength="6" placeholder="কমপক্ষে ৬ অক্ষর"></div>
+   <button class="primary" style="width:100%" onclick="signup()">Submit Registration</button><div id="signupStatus" class="status"></div>
+   <p class="small">আগে রেজিস্ট্রেশন করেছেন? <a href="#" onclick="setAuthMode('login');return false">Login করুন</a></p>
+  </div>
+ </div>
+</div>
+
+<footer class="footer">© <span id="year"></span> Digital Career Academy. All rights reserved.</footer>
+
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+const SUPABASE_URL = 'https://wjgiiftctqpkmlcjmand.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_gmNQhbzzHz6x0aK_nKPPDA_7rwaPWGZ';
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+let currentUser = null;
+let currentProfile = null;
+let allCourses = [];
+
+const $ = id => document.getElementById(id);
+const clean = value => String(value ?? '').trim();
+const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function status(id, message, type='') { const el=$(id); if(el){el.textContent=message;el.className='status '+type;} }
+function normalizePhone(value) {
+  let digits=String(value||'').replace(/\D/g,'');
+  if(digits.startsWith('00')) digits=digits.slice(2);
+  if(digits.length===10) digits='91'+digits;
+  return digits;
+}
+function authEmail(phone) { return normalizePhone(phone)+'@login.digitalcareeracademy.com'; }
+
+window.goHome=()=>{ $('dashboard').style.display='none';$('home').style.display='block';window.scrollTo(0,0); };
+window.openAuth=(mode='login')=>{ $('authModal').classList.add('show');window.setAuthMode(mode); };
+window.closeAuth=()=>{ $('authModal').classList.remove('show'); };
+window.setAuthMode=(mode)=>{
+  $('authTitle').textContent=mode==='signup'?'Student Registration':mode==='admin'?'Admin Login':'Student Login';
+  $('loginForm').classList.toggle('hidden',mode==='signup');
+  $('signupForm').classList.toggle('hidden',mode!=='signup');
+  status('loginStatus','');status('signupStatus','');
+};
+function fillCourseSelects(){
+  const options=allCourses.filter(c=>c.active!==false).map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
+  $('sCourse').innerHTML='<option value="">কোর্স নির্বাচন করুন</option>'+options;
+  $('classCourse').innerHTML='<option value="">কোর্স নির্বাচন করুন</option>'+allCourses.map(c=>`<option value="${esc(c.id)}">${esc(c.name)}</option>`).join('');
+}
+async function loadCourses(){
+  const {data,error}=await db.from('courses').select('*').order('name');
+  if(error){$('courseCards').innerHTML='<div class="card">কোর্স লোড করা যায়নি। Supabase courses table ও permission পরীক্ষা করুন।</div>';return;}
+  allCourses=data||[];
+  $('courseCards').innerHTML=allCourses.filter(c=>c.active!==false).map(c=>`<div class="card"><h3>${esc(c.name)}</h3><p>${esc(c.duration||'')}</p><div class="price">₹${esc(c.offer_fee??'Contact us')}</div><button class="primary" onclick="openAuth('signup')">Enroll Now</button></div>`).join('')||'<div class="card">এখনও কোনো কোর্স যোগ করা হয়নি।</div>';
+  fillCourseSelects();
+}
+window.signup=async()=>{
+  const name=clean($('sName').value),father=clean($('sFather').value),address=clean($('sAddress').value),phone=normalizePhone($('sPhone').value),email=clean($('sEmail').value),qual=clean($('sQual').value),course=$('sCourse').value,password=$('sPassword').value;
+  if(!name||!father||!address||!phone||!qual||!course||!password){status('signupStatus','সব * চিহ্নিত ঘর পূরণ করুন।','err');return;}
+  if(!/^\d{12}$/.test(phone)){status('signupStatus','ভারতের ১০ সংখ্যার মোবাইল নম্বর দিন, অথবা +91-সহ দিন।','err');return;}
+  if(password.length<6){status('signupStatus','Password কমপক্ষে ৬ অক্ষরের হতে হবে।','err');return;}
+  status('signupStatus','Registration হচ্ছে...'); 
+  const {data,error}=await db.auth.signUp({email:authEmail(phone),password,options:{data:{full_name:name,mobile:phone}}});
+  if(error){status('signupStatus',error.message,'err');return;}
+  if(!data.user){status('signupStatus','Registration সম্পন্ন হয়নি। আবার চেষ্টা করুন।','err');return;}
+  if(data.session){
+    const {error:profileError}=await db.from('profiles').upsert({id:data.user.id,full_name:name,father_name:father,address,mobile:phone,email:email||null,qualification:qual,role:'student'});
+    if(profileError){status('signupStatus','Account হয়েছে, কিন্তু profile save হয়নি: '+profileError.message,'err');return;}
+    const {error:enrollError}=await db.from('enrollments').insert({student_id:data.user.id,course_id:course,status:'pending'});
+    if(enrollError){status('signupStatus','Account হয়েছে, কিন্তু enrollment save হয়নি: '+enrollError.message,'err');return;}
+    status('signupStatus','Registration সফল হয়েছে। এখন Student Login করুন।','ok');
+  }else{
+    status('signupStatus','Account তৈরি হয়েছে। Supabase Email Confirmation চালু থাকলে আগে confirmation প্রয়োজন। আপনার project-এ confirmation বন্ধ/সঠিকভাবে configure করে তারপর Login করুন।','ok');
+  }
+};
+window.login=async()=>{
+  const phone=normalizePhone($('loginPhone').value),password=$('loginPassword').value;
+  if(!phone||!password){status('loginStatus','মোবাইল নম্বর ও Password লিখুন।','err');return;}
+  status('loginStatus','Login হচ্ছে...');
+  const {data,error}=await db.auth.signInWithPassword({email:authEmail(phone),password});
+  if(error){status('loginStatus',error.message,'err');return;}
+  currentUser=data.user;
+  const {data:profile,error:profileError}=await db.from('profiles').select('*').eq('id',currentUser.id).maybeSingle();
+  if(profileError){await db.auth.signOut();status('loginStatus','Profile load error: '+profileError.message,'err');return;}
+  if(!profile){await db.auth.signOut();status('loginStatus','এই account-এর profile পাওয়া যায়নি। Admin-এর সঙ্গে যোগাযোগ করুন।','err');return;}
+  currentProfile=profile;
+  if(profile.role!=='admin' && profile.role!=='student'){await db.auth.signOut();status('loginStatus','এই account-এর role অনুমোদিত নয়।','err');return;}
+  if(profile.role==='admin' && phone!=='918001795038'){await db.auth.signOut();status('loginStatus','Admin mobile number মিলছে না।','err');return;}
+  closeAuth();await showDashboard();
+};
+async function showDashboard(){
+  $('home').style.display='none';$('dashboard').style.display='block';$('welcome').textContent='স্বাগতম, '+(currentProfile.full_name||'User');$('userPhone').textContent=currentProfile.mobile||'';
+  const admin=currentProfile.role==='admin';
+  $('adminArea').classList.toggle('hidden',!admin);$('studentArea').classList.toggle('hidden',admin);
+  if(admin) await loadAdminData(); else await loadStudentData();
+  window.scrollTo(0,0);
+}
+async function loadStudentData(){
+  const {data,error}=await db.from('enrollments').select('id,status,created_at,courses(id,name,duration,offer_fee)').eq('student_id',currentUser.id).order('created_at',{ascending:false});
+  if(error){$('enrollmentList').textContent='Enrollment load error: '+error.message;return;}
+  const rows=data||[];$('countCourses').textContent=rows.length;$('countApproved').textContent=rows.filter(x=>x.status==='approved').length;
+  $('enrollmentList').innerHTML=rows.map(x=>`<div class="card" style="margin:10px 0"><h3>${esc(x.courses?.name||'Course')}</h3><p>Duration: ${esc(x.courses?.duration||'')}</p><p>Status: <b>${esc(x.status||'pending')}</b></p><p>Fee: ₹${esc(x.courses?.offer_fee??'')}</p>${x.status==='approved'?await classLinkHTML(x.course_id||x.courses?.id):'<p class="small">Admin approval-এর অপেক্ষায় রয়েছে।</p>'}</div>`).join('')||'আপনি এখনও কোনো কোর্সে ভর্তি হননি।';
+  $('profileDetails').innerHTML=`নাম: ${esc(currentProfile.full_name)}<br>পিতার নাম: ${esc(currentProfile.father_name)}<br>মোবাইল: ${esc(currentProfile.mobile)}<br>ঠিকানা: ${esc(currentProfile.address)}<br>যোগ্যতা: ${esc(currentProfile.qualification)}`;
+}
+async function classLinkHTML(courseId){
+  if(!courseId)return '';
+  const {data}=await db.from('class_links').select('live_class_url,recording_url').eq('course_id',courseId).maybeSingle();
+  if(!data)return '<p class="small">Class link এখনও দেওয়া হয়নি।</p>';
+  let out='';
+  if(data.live_class_url)out+=`<p>Live Class: <a class="link" href="${esc(data.live_class_url)}" target="_blank" rel="noopener">Join Live Class</a></p>`;
+  if(data.recording_url)out+=`<p>Recording: <a class="link" href="${esc(data.recording_url)}" target="_blank" rel="noopener">Watch Recording</a></p>`;
+  return out||'<p class="small">Class link এখনও দেওয়া হয়নি।</p>';
+}
+window.showAdminTab=(tab)=>{
+  ['enrollments','courses','classes'].forEach(x=>$('admin'+x[0].toUpperCase()+x.slice(1)).classList.toggle('hidden',x!==tab));
+  ['Enroll','Courses','Class'].forEach((x,i)=>$('tab'+x+'Btn').classList.toggle('active',['enrollments','courses','classes'][i]===tab));
+};
+async function loadAdminData(){
+  const {data,error}=await db.from('enrollments').select('id,status,created_at,student_id,course_id,profiles(full_name,mobile),courses(name)').order('created_at',{ascending:false});
+  if(error){$('enrollmentAdminList').textContent='Load error: '+error.message;return;}
+  $('enrollmentAdminList').innerHTML=(data||[]).map(x=>`<div class="card" style="margin:10px 0"><b>${esc(x.profiles?.full_name||'Student')}</b> — ${esc(x.profiles?.mobile||'')}<p>Course: ${esc(x.courses?.name||'')}</p><p>Status: <b>${esc(x.status)}</b></p><button class="primary" onclick="updateEnrollment('${esc(x.id)}','approved')">Approve</button> <button class="danger" onclick="updateEnrollment('${esc(x.id)}','rejected')">Reject</button></div>`).join('')||'কোনো enrollment নেই।';
+  $('adminCourseList').innerHTML=allCourses.map(c=>`<p>${esc(c.name)} — ₹${esc(c.offer_fee??'')} (${c.active===false?'Inactive':'Active'})</p>`).join('')||'কোনো course নেই।';
+}
+window.updateEnrollment=async(id,newStatus)=>{
+  const {error}=await db.from('enrollments').update({status:newStatus}).eq('id',id);
+  if(error){status('adminStatus',error.message,'err');return;}
+  status('adminStatus','Enrollment status updated.','ok');await loadAdminData();
+};
+window.addCourse=async()=>{
+  const name=clean($('newCourseName').value),duration=clean($('newCourseDuration').value),fee=Number($('newCourseFee').value);
+  if(!name||!duration||!Number.isFinite(fee)){status('adminStatus','Course name, duration ও fee দিন।','err');return;}
+  const {error}=await db.from('courses').insert({name,duration,offer_fee:fee,active:true});
+  if(error){status('adminStatus',error.message,'err');return;}
+  $('newCourseName').value='';$('newCourseDuration').value='';$('newCourseFee').value='';
+  status('adminStatus','Course added.','ok');await loadCourses();await loadAdminData();
+};
+window.saveClassLinks=async()=>{
+  const course_id=$('classCourse').value,live_class_url=clean($('liveUrl').value),recording_url=clean($('recordUrl').value);
+  if(!course_id){status('adminStatus','একটি course নির্বাচন করুন।','err');return;}
+  const {error}=await db.from('class_links').upsert({course_id,live_class_url,recording_url,updated_at:new Date().toISOString()},{onConflict:'course_id'});
+  if(error){status('adminStatus',error.message,'err');return;}
+  status('adminStatus','Class links saved.','ok');
+};
+window.logout=async()=>{await db.auth.signOut();currentUser=null;currentProfile=null;$('dashboard').style.display='none';$('home').style.display='block';window.scrollTo(0,0);};
+$('year').textContent=new Date().getFullYear();
+loadCourses();
+</script>
+</body>
+</html>
